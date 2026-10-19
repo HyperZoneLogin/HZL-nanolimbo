@@ -1,0 +1,77 @@
+/*
+ * Copyright (C) 2020 Nan1t
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+package ua.nanit.limbo.server;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.experimental.UtilityClass;
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+@UtilityClass
+public class Log {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger("Limbo");
+    private static int debugLevel = Level.INFO.getIndex();
+
+    public static void info(@NonNull Object msg, @Nullable Object... args) {
+        LOGGER.info(String.format(msg.toString(), args));
+    }
+
+    public static void debug(@NonNull Object msg, @Nullable Object... args) {
+        LOGGER.debug(String.format(msg.toString(), args));
+    }
+
+    public static void warning(@NonNull Object msg, @Nullable Object... args) {
+        LOGGER.warn(String.format(msg.toString(), args));
+    }
+
+    public static void warning(@NonNull Object msg, @NonNull Throwable t, @Nullable Object... args) {
+        LOGGER.warn(String.format(msg.toString(), args), t);
+    }
+
+    public static void error(@NonNull Object msg, @Nullable Object... args) {
+        LOGGER.error(msg.toString(), args);
+    }
+
+    public static void error(@NonNull Object msg, @NonNull Throwable t, @Nullable Object... args) {
+        LOGGER.error(String.format(msg.toString(), args), t);
+    }
+
+    public static boolean isDebug() {
+        return debugLevel >= Level.DEBUG.getIndex();
+    }
+
+    static void setLevel(int level) {
+        debugLevel = level;
+    }
+
+    @AllArgsConstructor
+    @Getter
+    public enum Level {
+        ERROR("ERROR", 0),
+        WARNING("WARNING", 1),
+        INFO("INFO", 2),
+        DEBUG("DEBUG", 3);
+
+        private final String display;
+        private final int index;
+    }
+}
