@@ -5,7 +5,8 @@ HyperZoneLogin 的可选内置 NanoLimbo 后端模块，独立于主仓库
 
 - `src/main/kotlin`: HZL 的 `HyperSubModule` 包装层与命令。
 - `NanoLimbo/`: vendored 的 [NanoLimbo](https://github.com/HyperZoneLogin/NanoLimbo) 源码。
-- 产物：`build/libs/HZL-nanolimbo-<version>.jar`（HZL 嵌入式模块，无独立 `velocity-plugin.json`）。
+- 产物：`build/libs/HZL-nanolimbo-<version>.jar`，带完整的 `velocity-plugin.json`，
+  可直接作为独立 Velocity 插件载入（依赖主插件 `hyperzonelogin`）。
 
 ## 构建
 
@@ -23,8 +24,8 @@ API 版本通过 `gradle.properties` 的 `hzlApiVersion` 控制（默认 `1.0.0-
 
 ## 安装
 
-把构建出的 jar 放进主插件的可选模块目录，并在 `core.conf` 中启用
-`modules.backend-nanolimbo`。主仓库默认不打包本模块。
+把构建出的 jar 和主插件 `HyperZoneLogin.jar` 一起放进 Velocity 的 `plugins/` 目录即可。
+本模块在 `ProxyInitializeEvent` 中把 `NanoLimboSubModule` 注册到主插件，不会与主插件内置模块重复加载。
 
 ## CI
 

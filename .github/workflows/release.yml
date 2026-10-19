@@ -42,7 +42,12 @@ jobs:
           ./gradlew :api:publishToMavenLocal -q
 
       - name: Build module jar
-        run: ./gradlew clean build
+        run: |
+          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+            ./gradlew clean build -PpluginVersion="${GITHUB_REF_NAME#v}"
+          else
+            ./gradlew clean build
+          fi
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

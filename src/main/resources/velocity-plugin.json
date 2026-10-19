@@ -1,0 +1,8 @@
+{
+  "id": "hzl-backend-nanolimbo",
+  "name": "HyperZoneLogin - Backend NanoLimbo",
+  "version": "${pluginVersion}",
+  "authors": ["ksqeib"],
+  "dependencies": [{"id":"hyperzonelogin","optional":false}],
+  "main": "icu.h2l.login.backend.nanolimbo.NanoLimboPlugin"
+}

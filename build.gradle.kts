@@ -6,7 +6,10 @@ plugins {
 }
 
 group = "icu.h2l.login"
-version = providers.gradleProperty("pluginVersion").orElse("1.0.0-SNAPSHOT").get()
+// 作为主仓库 submodule 构建时沿用主仓库版本；独立构建时使用 pluginVersion。
+if (findProject(":api") == null) {
+    version = providers.gradleProperty("pluginVersion").orElse("1.0.0-SNAPSHOT").get()
+}
 
 java {
     toolchain {
@@ -61,6 +64,25 @@ dependencies {
 }
 
 tasks.named<Jar>("jar") {
+    // Keep the default version so the standalone plugin jar carries the module
+    // version (HZL-nanolimbo-<version>.jar / HZL-backend-nanolimbo-<version>.jar).
     archiveClassifier.set("")
-    archiveVersion.set("")
+}
+
+// 独立构建时也要把 velocity-plugin.json 里的版本占位符替换成实际版本。
+tasks.withType<ProcessResources>().configureEach {
+    val pluginVersion = project.version.toString()
+    inputs.property("pluginVersion", pluginVersion)
+    filteringCharset = "UTF-8"
+
+    val srcTemplate = project.file("src/main/resources/velocity-plugin.json")
+    if (srcTemplate.exists()) {
+        inputs.file(srcTemplate)
+        exclude("velocity-plugin.json")
+        doLast("injectPluginVersion") {
+            val dst = destinationDir.resolve("velocity-plugin.json")
+            dst.parentFile.mkdirs()
+            dst.writeText(srcTemplate.readText().replace("\${pluginVersion}", pluginVersion))
+        }
+    }
 }
