@@ -20,6 +20,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          # NanoLimbo 是本仓库的嵌套 submodule，必须递归检出。
+          submodules: recursive
 
       - name: Set up JDK 25
         uses: actions/setup-java@v4
