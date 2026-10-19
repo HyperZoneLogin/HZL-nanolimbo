@@ -34,70 +34,67 @@ import net.kyori.adventure.text.Component
 object NanoLimboMessages {
     private const val NAMESPACE = "backend-nanolimbo"
 
-    fun usageStatus(source: CommandSource): Component = render(source, "usage.status", "/hzl-limbo status")
-    fun usageStart(source: CommandSource): Component = render(source, "usage.start", "/hzl-limbo start")
-    fun usageStop(source: CommandSource): Component = render(source, "usage.stop", "/hzl-limbo stop")
-    fun usageRestart(source: CommandSource): Component = render(source, "usage.restart", "/hzl-limbo restart")
+    fun usageStatus(source: CommandSource): Component = render(source, "usage.status")
+    fun usageStart(source: CommandSource): Component = render(source, "usage.start")
+    fun usageStop(source: CommandSource): Component = render(source, "usage.stop")
+    fun usageRestart(source: CommandSource): Component = render(source, "usage.restart")
     fun usageConnections(source: CommandSource): Component =
-        render(source, "usage.connections", "/hzl-limbo connections")
+        render(source, "usage.connections")
 
-    fun statusRunning(source: CommandSource): Component = render(source, "status.running", "NanoLimbo 后端正在运行")
-    fun statusStopped(source: CommandSource): Component = render(source, "status.stopped", "NanoLimbo 后端已停止")
+    fun statusRunning(source: CommandSource): Component = render(source, "status.running")
+    fun statusStopped(source: CommandSource): Component = render(source, "status.stopped")
 
     fun statusAddress(source: CommandSource, address: String): Component =
-        render(source, "status.address", "绑定地址: <address>", HyperZoneMessagePlaceholder.text("address", address))
+        render(source, "status.address", HyperZoneMessagePlaceholder.text("address", address))
 
     fun statusUptime(source: CommandSource, uptime: String): Component =
-        render(source, "status.uptime", "运行时长: <uptime>", HyperZoneMessagePlaceholder.text("uptime", uptime))
+        render(source, "status.uptime", HyperZoneMessagePlaceholder.text("uptime", uptime))
 
-    fun statusConnections(source: CommandSource, count: Int, maxPlayers: Int): Component = render(
-        source,
-        "status.connections",
-        "当前连接: <count>/<max_players>",
+    fun statusConnections(source: CommandSource, count: Int, maxPlayers: Int): Component = render(source, "status.connections",
         HyperZoneMessagePlaceholder.text("count", count),
         HyperZoneMessagePlaceholder.text("max_players", maxPlayers)
     )
 
     fun statusTransport(source: CommandSource, transport: String): Component =
-        render(source, "status.transport", "传输类型: <transport>", HyperZoneMessagePlaceholder.text("transport", transport))
+        render(source, "status.transport", HyperZoneMessagePlaceholder.text("transport", transport))
 
     fun statusVersion(source: CommandSource, version: String): Component =
-        render(source, "status.version", "Limbo 版本: <version>", HyperZoneMessagePlaceholder.text("version", version))
+        render(source, "status.version", HyperZoneMessagePlaceholder.text("version", version))
 
     fun statusLastFailure(source: CommandSource, reason: String): Component =
-        render(source, "status.last-failure", "上次启动失败: <reason>", HyperZoneMessagePlaceholder.text("reason", reason))
+        render(source, "status.last-failure", HyperZoneMessagePlaceholder.text("reason", reason))
 
-    fun startStarting(source: CommandSource): Component = render(source, "start.starting", "正在启动 NanoLimbo 后端...")
+    fun startStarting(source: CommandSource): Component = render(source, "start.starting")
 
     fun startSuccess(source: CommandSource, address: String): Component =
-        render(source, "start.success", "NanoLimbo 后端已启动: <address>", HyperZoneMessagePlaceholder.text("address", address))
+        render(source, "start.success", HyperZoneMessagePlaceholder.text("address", address))
 
     fun startFailed(source: CommandSource, reason: String): Component =
-        render(source, "start.failed", "NanoLimbo 后端启动失败: <reason>", HyperZoneMessagePlaceholder.text("reason", reason))
+        render(source, "start.failed", HyperZoneMessagePlaceholder.text("reason", reason))
 
     fun startAlreadyRunning(source: CommandSource): Component =
-        render(source, "start.already-running", "NanoLimbo 后端已在运行中")
+        render(source, "start.already-running")
 
-    fun stopStopping(source: CommandSource): Component = render(source, "stop.stopping", "正在停止 NanoLimbo 后端...")
-    fun stopSuccess(source: CommandSource): Component = render(source, "stop.success", "NanoLimbo 后端已停止")
-    fun stopNotRunning(source: CommandSource): Component = render(source, "stop.not-running", "NanoLimbo 后端本就未在运行")
+    fun stopStopping(source: CommandSource): Component = render(source, "stop.stopping")
+    fun stopSuccess(source: CommandSource): Component = render(source, "stop.success")
+    fun stopNotRunning(source: CommandSource): Component = render(source, "stop.not-running")
 
     fun stopFailed(source: CommandSource, reason: String): Component =
-        render(source, "stop.failed", "停止 NanoLimbo 后端失败: <reason>", HyperZoneMessagePlaceholder.text("reason", reason))
+        render(source, "stop.failed", HyperZoneMessagePlaceholder.text("reason", reason))
 
     fun restartRestarting(source: CommandSource): Component =
-        render(source, "restart.restarting", "正在重启 NanoLimbo 后端...")
+        render(source, "restart.restarting")
 
     fun restartSuccess(source: CommandSource, address: String): Component =
-        render(source, "restart.success", "NanoLimbo 后端已重启: <address>", HyperZoneMessagePlaceholder.text("address", address))
+        render(source, "restart.success", HyperZoneMessagePlaceholder.text("address", address))
 
     fun restartFailed(source: CommandSource, reason: String): Component =
-        render(source, "restart.failed", "重启 NanoLimbo 后端失败: <reason>", HyperZoneMessagePlaceholder.text("reason", reason))
+        render(source, "restart.failed", HyperZoneMessagePlaceholder.text("reason", reason))
 
     fun connectionsSummary(source: CommandSource, count: Int): Component =
-        render(source, "connections.summary", "当前连接数: <count>", HyperZoneMessagePlaceholder.text("count", count))
+        render(source, "connections.summary", HyperZoneMessagePlaceholder.text("count", count))
 
-    fun connectionsEmpty(source: CommandSource): Component = render(source, "connections.empty", "当前没有玩家连接")
+    fun connectionsEmpty(source: CommandSource): Component = render(source, "connections.empty")
 
     fun connectionsEntry(
         source: CommandSource,
@@ -106,10 +103,7 @@ object NanoLimboMessages {
         uuid: String,
         clientVersion: String,
         address: String,
-    ): Component = render(
-        source,
-        "connections.entry",
-        "#<index> <name> (<uuid>) <client_version> <player_address>",
+    ): Component = render(source, "connections.entry",
         HyperZoneMessagePlaceholder.text("index", index),
         HyperZoneMessagePlaceholder.text("name", name),
         HyperZoneMessagePlaceholder.text("uuid", uuid),
@@ -118,10 +112,10 @@ object NanoLimboMessages {
     )
 
     fun connectionsAddressRedacted(source: CommandSource): Component =
-        render(source, "connections.address-redacted", "<redacted>")
+        render(source, "connections.address-redacted")
 
     fun busy(source: CommandSource): Component =
-        render(source, "busy", "另一个后端管理操作正在执行，请稍后再试")
+        render(source, "busy")
 
     /**
      * 把毫秒时长格式化为 `1h 2m 3s` 形式，未满一秒时给出 `<1s`。
@@ -149,17 +143,8 @@ object NanoLimboMessages {
     private fun render(
         source: CommandSource,
         key: String,
-        fallback: String,
         vararg placeholders: HyperZoneMessagePlaceholder
     ): Component {
-        val service = HyperZoneMessageServiceProvider.getOrNull()
-        return service?.render(source, "$NAMESPACE.$key", *placeholders)
-            ?: Component.text(placeholders.fold(fallback) { acc, placeholder ->
-                val replacement = when (placeholder) {
-                    is HyperZoneMessagePlaceholder.Text -> placeholder.value
-                    is HyperZoneMessagePlaceholder.ComponentValue -> placeholder.value.toString()
-                }
-                acc.replace("<${placeholder.name}>", replacement)
-            })
+        return HyperZoneMessageServiceProvider.get().render(source, "$NAMESPACE.$key", *placeholders)
     }
 }
